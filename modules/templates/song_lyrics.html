@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+{% block content %}
+        <h1>{{ author }}</h1>
+        <h4>{{ name }}</h4>
+        <pre id="text">{{ lyrics }}</pre>
+
+    <form method="POST" action="/saveWords" style="display:none" id="pyForm">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group" id="pyInput">
+                {{ form.words(class="form-control-lg") }}
+            </div>
+        </fieldset>
+        <div class="form-group" id="pySubmit">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+
+    <style>
+        .text {
+            font-size: 15px;
+            color: black;
+        }
+        .word {
+            background-color: #FFF;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+
+            margin-right: 5px;
+        }
+        .word:hover {
+            background-color: #47a0ffAA;
+        }
+        .word[selected=true], .word[selected=true]:hover {
+            background-color: #47a0ff44;
+        }
+        .submitButton {
+            margin-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100px;
+            background-color: #007bff !important;
+            color: #FFF;
+            font-size: 26px;
+            padding: 4px;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let main = document.getElementsByTagName("main")[0];
+
+        let textElement = document.getElementById("text");
+        let text = textElement.innerText;
+        main.removeChild(textElement);
+
+        let textDiv = document.createElement("div");
+        textDiv.classList.add("text");
+
+        let wordSpans = [];
+
+        let lines = text.split("\n");
+        for (let line of lines) {
+            let lineDiv = document.createElement("div");
+            let words = line.split(" ");
+
+            for (let word of words) {
+                if (!word) continue;
+
+                let wordSpan = document.createElement("span");
+                wordSpan.innerText = word;
+                wordSpan.classList.add("word");
+
+                wordSpan.onmousedown = startClick.bind(wordSpan);
+                wordSpan.onmouseenter = continueClick.bind(wordSpan);
+
+                wordSpans.push(wordSpan);
+                lineDiv.appendChild(wordSpan);
+            }
+
+            textDiv.appendChild(lineDiv);
+        }
+
+        let selectedWords = [];
+        function deselectWord(word) {
+            word = word.toLowerCase();
+
+            let newWords = [];
+            for(checkWord of selectedWords) {
+                if (checkWord !== word) newWords.push(checkWord);
+            }
+            selectedWords = newWords;
+
+            for (let wordSpan of wordSpans) {
+                if (wordSpan.innerText.toLowerCase() === word)
+                    wordSpan.setAttribute("selected", false);
+            }
+        }
+        function selectWord(word) {
+            word = word.toLowerCase();
+
+            for (checkWord of selectedWords) {
+                if (checkWord === word) return;
+            }
+            selectedWords.push(word);
+
+            for (let wordSpan of wordSpans) {
+                if (wordSpan.innerText.toLowerCase() === word)
+                    wordSpan.setAttribute("selected", true);
+            }
+        }
+        let selectionStarted = false;
+        let deselect;
+        function startClick(e) {
+            selectionStarted = true;
+            deselect = this.getAttribute("selected") === "true";
+
+            continueClick.call(this, e);
+        }
+        function continueClick(e) {
+            if (selectionStarted) {
+                if (deselect){
+                    deselectWord(this.innerText);
+                } else {
+                    selectWord(this.innerText);
+                }
+            }
+        }
+        function endClick(e) {
+            selectionStarted = false;
+        }
+
+        main.appendChild(textDiv);
+        document.body.onmouseup = endClick;
+        document.body.onmouseleave = endClick;
+
+        let button = document.createElement("button");
+        button.innerText = "Submit";
+        button.classList.add("submitButton");
+        main.appendChild(button);
+
+        button.onclick = (e) => {
+            if (selectedWords.length >= 3) {
+                let input = document.getElementById("pyInput").getElementsByTagName("input")[0];
+                input.value = selectedWords.join(" ");
+                let button = document.getElementById("pySubmit").getElementsByTagName("input")[0];
+                button.click();
+            } else {
+                alert("To create new Quizlet set you need to enter at least three words. Please, choose few more.");
+            }
+        }
+
+    </script>
+{% endblock content %}

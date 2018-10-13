@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='jumbotron' style="min-height:450px;">
+    <h3 style="margin-bottom: 0.83em;">Song "{{ song_name }}" of {{ author_name }} chosen has no lyrics</h3>
+    <h6 style="margin-bottom: 0.83em;">Please try again with other song.</h6>
+    <form method="GET" action="/">
+        <input type="submit"  class="btn btn-info btn-lg" value="Back to search" style="margin-bottom:40px"/>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='jumbotron' style="min-height:450px;">
+    <h3 style="margin-bottom: 0.83em;">Succesfully saved words:</h3>
+    <ul class="list-group" style="margin-bottom:20px">
+    {% for word in words %}
+        <li class="list-group-item">{{ word }}</li>
+    {% endfor %}
+    </ul>
+    <form method="GET" action="/">
+        <input type="submit"  class="btn btn-info btn-lg" value="Back to search" style="margin-bottom:40px"/>
+    </form>
+</div>
+{% endblock content %}

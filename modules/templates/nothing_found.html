@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='jumbotron' style="min-height:450px;">
+    <h3 style="margin-bottom: 0.83em;">There is no song "{{ song_name }}" of {{ author_name }} in Musixmatch database.</h3>
+    <h6 style="margin-bottom: 0.83em;">Please check correctness of your input or try again with other song.</h6>
+    <form method="GET" action="/">
+        <input type="submit"  class="btn btn-info btn-lg" value="Back to search" style="margin-bottom:40px"/>
+    </form>
+</div>
+{% endblock content %}
