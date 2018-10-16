@@ -3,6 +3,7 @@ musixmatch = Musixmatch('2d6016b0ba648c1e1b10321e982b0db9')
 
 
 def get_track_id(artist_name, track_name):
+     """Utility to get track_id by author name and song name."""
      dict_id = musixmatch.track_search(q_artist= artist_name, q_track= track_name,page_size=100, page=1, s_track_rating='desc')
      track_list = dict_id['message']['body']['track_list']
      if not track_list:
@@ -14,6 +15,7 @@ def get_track_id(artist_name, track_name):
 
 
 def get_track_lyrics(track_id):
+     """Utility to get track lyrics by track_id"""
      try:
           track_info = musixmatch.track_lyrics_get(track_id)['message']['body']
           if not track_info:

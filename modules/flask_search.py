@@ -14,6 +14,7 @@ my_app = q.Quizlet(client_id='vDYMbQXMZR',
 
 @app.route('/', methods=['GET', 'POST'])
 def show():
+    "Home page and user authentication utility."
     if request.method == 'POST':
         tup = my_app.generate_auth_url('write_set')
         return redirect(tup[0])
@@ -27,16 +28,19 @@ def show():
 
 @app.route('/about')
 def about():
+    "About page."
     return render_template('about.html', title='MusixQuiz')
 
 
 @app.route('/lyrics', methods=['POST'])
 def lyrics(author, song, lyrics):
+    "Get lyrics page."
     return render_template('song_lyrics.html', author=author, name=song, lyrics=lyrics)
 
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
+    "Search page."
     if 'user' not in session:
         return redirect("http://kolinkodanylo.pythonanywhere.com/")
     form = SearchForm()
