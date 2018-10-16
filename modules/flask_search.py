@@ -12,6 +12,7 @@ my_app = q.Quizlet(client_id='vDYMbQXMZR',
                            encoded_auth_str='dkRZTWJRWE1aUjpxbTJ5ajZKanIzdVRnOHc3TWhjRVVH',
                            redirect_uri="http://kolinkodanylo.pythonanywhere.com/")
 
+
 @app.route('/', methods=['GET', 'POST'])
 def show():
     "Home page and user authentication utility."
