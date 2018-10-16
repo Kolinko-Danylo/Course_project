@@ -72,3 +72,4 @@ def save_words():
         print(words)
         my_app.add_set('MusixQuiz Terms', words, [' ' for i in range(len(words))], 'en', 'en')
         return render_template('saveWords.html', words=words)
+
