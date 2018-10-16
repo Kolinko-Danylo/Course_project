@@ -2,7 +2,7 @@ import random
 from urllib.parse import urlencode, urljoin
 
 import requests
-j
+
 
 class Quizlet():
     "Class that provides a simple request tools for Quizlet OAuth 2.0"
