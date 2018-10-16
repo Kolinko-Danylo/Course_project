@@ -28,7 +28,8 @@ def show():
 
 @app.route('/about')
 def about():
-    "About page."
+
+
     return render_template('about.html', title='MusixQuiz')
 
 
