@@ -1,17 +1,14 @@
 <h1><a href="http://kolinkodanylo.pythonanywhere.com/">MusixQuiz</a></h1>
-<h1>Application for learning new words from your favourite songs</h1>
+<h2>Application for learning new words from your favourite songs</h2>
 
-<h3>Description<h3>
+<h4>Description</h4>
 This project was created to help people learning new terms and do it with pleasure. MusixQuiz provides a simple search lyrics utility to find favourite songs and choose new terms from the lyrics.
 
-<h3>Running the project</h3>
-To run the program go straight to <p><a href="http://kolinkodanylo.pythonanywhere.com/">MusixQuiz</a></p>.
+<h4>Running the project</h4>
+You can use deployed version at PythonAnywhere or deploy the code to some platform and then you are ready to use new version of that app.
 
-<h3>The structure of the project</h3>
-The progect consists of back-end and front-end parts. 
-In map module is Map ADT for processing the data from json file taken from google maps api for a certain place. 
-In place module is Place class for initializing all needed information about all places. 
-In function.py are functions to work with request froms and api. The main module runs the project.
+<h4>The structure of the project</h4>
+The progect consists of back-end and front-end parts. File musixmatch_request.py handles getting all lyrics part and file quizlet_user_auth.py handles user authentication. forms.py handles user information passing to the application.
 
-How to use the project properly?
-When you run the main module you need to open the html page. There you will see three buttons. The first one is for you current location. You have to enter it in English without tabs separated by a comma. The second is for youe destination. The last one is for tags or in simple what you want to see. You will be given a list of advise and then you enter what you want in English (bar, caffee, food..)
+<h4>How to use the project properly?</h4>
+<p>Just follow instruction of the app at <a href="http://kolinkodanylo.pythonanywhere.com/">MusixQuiz</a>.</p>
