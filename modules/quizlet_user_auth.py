@@ -42,19 +42,15 @@ class Quizlet():
         :param code: provided user code
         :return: None
         """
-        print('req')
         data = {'grant_type': 'authorization_code',
                 'code': code,
                 'redirect_uri': self.redirect_uri}
         headers = {'Content-type': 'application/x-www-form-urlencoded',
                    'Authorization': 'Basic %s' % self.encoded_auth_str}
-        print('r')
         r = requests.post(Quizlet.token_url_base, headers=headers, data=data)
-        print('rrr')
 
         # Keys: access_token, token_type, expires_in, scope, user_id
         self.access_info = r.json()
-        print(self.access_info)
 
         ##################
         # Request Utility
